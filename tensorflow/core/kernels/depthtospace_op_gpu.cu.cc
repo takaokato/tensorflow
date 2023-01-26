@@ -142,6 +142,18 @@ __global__ void D2S_NCHW_LOOP(const int32 nthreads,
 
 // Specialization of DepthToSpaceOpFunctor for a GPUDevice.
 namespace functor {
+template <typename Device, typename T, TensorFormat data_format>
+void DepthToSpaceOpFunctor<Device, T, data_format>::operator()(const Device& d, typename TTypes<T, 4>::ConstTensor input,
+                                       int block_size, typename TTypes<T, 4>::Tensor output)
+{
+    assert(false);
+}
+template <typename Device, typename T, TensorFormat data_format>
+void DepthToSpaceOpFunctor<Device, T, data_format>::operator()(const Device& d, typename TTypes<T, 5>::ConstTensor input,
+    int block_size, typename TTypes<T, 5>::Tensor output)
+{
+    assert(false);
+}
 
 template <typename T>
 struct DepthToSpaceOpFunctor<GPUDevice, T, FORMAT_NHWC> {

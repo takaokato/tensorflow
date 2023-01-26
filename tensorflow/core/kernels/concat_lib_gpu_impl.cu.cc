@@ -172,6 +172,60 @@ void ConcatGPUImpl(const Eigen::GpuDevice& gpu_device,
     }
   }
 }
+template<>
+void ConcatGPUImpl<tstring, int32>(const Eigen::GpuDevice& gpu_device,
+    const GpuDeviceArrayStruct<const tstring*>& input_ptrs,
+    const GpuDeviceArrayStruct<int32>& output_scan,
+    bool fixed_size, int split_size,
+    typename TTypes<tstring, 2>::Matrix* output)
+{
+    assert(false);
+}
+template<>
+void ConcatGPUImpl<ResourceHandle, int32>(const Eigen::GpuDevice& gpu_device,
+    const GpuDeviceArrayStruct<const ResourceHandle*>& input_ptrs,
+    const GpuDeviceArrayStruct<int32>& output_scan,
+    bool fixed_size, int split_size,
+    typename TTypes<ResourceHandle, 2>::Matrix* output)
+{
+    assert(false);
+}
+template<>
+void ConcatGPUImpl<Variant, int32>(const Eigen::GpuDevice& gpu_device,
+    const GpuDeviceArrayStruct<const Variant*>& input_ptrs,
+    const GpuDeviceArrayStruct<int32>& output_scan,
+    bool fixed_size, int split_size,
+    typename TTypes<Variant, 2>::Matrix* output)
+{
+    assert(false);
+}
+template<>
+void ConcatGPUImpl<tstring, int64>(const Eigen::GpuDevice& gpu_device,
+    const GpuDeviceArrayStruct<const tstring*>& input_ptrs,
+    const GpuDeviceArrayStruct<int64>& output_scan,
+    bool fixed_size, int split_size,
+    typename TTypes<tstring, 2>::Matrix* output)
+{
+    assert(false);
+}
+template<>
+void ConcatGPUImpl<ResourceHandle, int64>(const Eigen::GpuDevice& gpu_device,
+    const GpuDeviceArrayStruct<const ResourceHandle*>& input_ptrs,
+    const GpuDeviceArrayStruct<int64>& output_scan,
+    bool fixed_size, int split_size,
+    typename TTypes<ResourceHandle, 2>::Matrix* output)
+{
+    assert(false);
+}
+template<>
+void ConcatGPUImpl<Variant, int64>(const Eigen::GpuDevice& gpu_device,
+    const GpuDeviceArrayStruct<const Variant*>& input_ptrs,
+    const GpuDeviceArrayStruct<int64>& output_scan,
+    bool fixed_size, int split_size,
+    typename TTypes<Variant, 2>::Matrix* output)
+{
+    assert(false);
+}
 
 #define REGISTER_GPUCONCAT32(T)                                               \
   template void ConcatGPUSlice<T, int32>(                                     \
@@ -201,21 +255,45 @@ void ConcatGPUImpl(const Eigen::GpuDevice& gpu_device,
       const GpuDeviceArrayStruct<int64_t>& ptr_offsets, bool fixed_size, \
       int split_size, typename TTypes<T, 2>::Matrix* output);
 
-TF_CALL_INTEGRAL_TYPES(REGISTER_GPUCONCAT32);  // int32 Needed for TensorLists.
-TF_CALL_bfloat16(REGISTER_GPUCONCAT32);
-TF_CALL_GPU_ALL_TYPES(REGISTER_GPUCONCAT32);
+//TF_CALL_INTEGRAL_TYPES(REGISTER_GPUCONCAT32);  // int32 Needed for TensorLists.
+//TF_CALL_bfloat16(REGISTER_GPUCONCAT32);
+//TF_CALL_GPU_ALL_TYPES(REGISTER_GPUCONCAT32);
+TF_CALL_ALL_TYPES(REGISTER_GPUCONCAT32);
+TF_CALL_qint8(REGISTER_GPUCONCAT32);
+TF_CALL_quint8(REGISTER_GPUCONCAT32);
+TF_CALL_qint16(REGISTER_GPUCONCAT32);
+TF_CALL_quint16(REGISTER_GPUCONCAT32);
+TF_CALL_qint32(REGISTER_GPUCONCAT32);
 
-TF_CALL_INTEGRAL_TYPES(REGISTER_GPUCONCAT64);  // int32 Needed for TensorLists.
-TF_CALL_bfloat16(REGISTER_GPUCONCAT64);
-TF_CALL_GPU_ALL_TYPES(REGISTER_GPUCONCAT64);
+//TF_CALL_INTEGRAL_TYPES(REGISTER_GPUCONCAT64);  // int32 Needed for TensorLists.
+//TF_CALL_bfloat16(REGISTER_GPUCONCAT64);
+//TF_CALL_GPU_ALL_TYPES(REGISTER_GPUCONCAT64);
+TF_CALL_ALL_TYPES(REGISTER_GPUCONCAT64);
+TF_CALL_qint8(REGISTER_GPUCONCAT64);
+TF_CALL_quint8(REGISTER_GPUCONCAT64);
+TF_CALL_qint16(REGISTER_GPUCONCAT64);
+TF_CALL_quint16(REGISTER_GPUCONCAT64);
+TF_CALL_qint32(REGISTER_GPUCONCAT64);
 
-TF_CALL_INTEGRAL_TYPES(REGISTER_GPU32);  // int32 Needed for TensorLists.
-TF_CALL_bfloat16(REGISTER_GPU32);
-TF_CALL_GPU_ALL_TYPES(REGISTER_GPU32);
+//TF_CALL_INTEGRAL_TYPES(REGISTER_GPU32);  // int32 Needed for TensorLists.
+//TF_CALL_bfloat16(REGISTER_GPU32);
+//TF_CALL_GPU_ALL_TYPES(REGISTER_GPU32);
+TF_CALL_ALL_TYPES(REGISTER_GPU32);
+TF_CALL_qint8(REGISTER_GPU32);
+TF_CALL_quint8(REGISTER_GPU32);
+TF_CALL_qint16(REGISTER_GPU32);
+TF_CALL_quint16(REGISTER_GPU32);
+TF_CALL_qint32(REGISTER_GPU32);
 
-TF_CALL_INTEGRAL_TYPES(REGISTER_GPU64);  // int32 Needed for TensorLists.
-TF_CALL_bfloat16(REGISTER_GPU64);
-TF_CALL_GPU_ALL_TYPES(REGISTER_GPU64);
+//TF_CALL_INTEGRAL_TYPES(REGISTER_GPU64);  // int32 Needed for TensorLists.
+//TF_CALL_bfloat16(REGISTER_GPU64);
+//TF_CALL_GPU_ALL_TYPES(REGISTER_GPU64);
+TF_CALL_ALL_TYPES(REGISTER_GPU64);
+TF_CALL_qint8(REGISTER_GPU64);
+TF_CALL_quint8(REGISTER_GPU64);
+TF_CALL_qint16(REGISTER_GPU64);
+TF_CALL_quint16(REGISTER_GPU64);
+TF_CALL_qint32(REGISTER_GPU64);
 
 #undef REGISTER_GPUCONCAT32
 #undef REGISTER_GPUCONCAT64

@@ -65,9 +65,16 @@ void ConcatGPU(
           inputs_flat,                                                        \
       Tensor* output, typename TTypes<T, 2>::Tensor* output_flat);
 
-TF_CALL_INTEGRAL_TYPES(REGISTER);  // int32 Needed for TensorLists.
-TF_CALL_bfloat16(REGISTER);
-TF_CALL_GPU_ALL_TYPES(REGISTER);
+//TF_CALL_INTEGRAL_TYPES(REGISTER);  // int32 Needed for TensorLists.
+//TF_CALL_bfloat16(REGISTER);
+//TF_CALL_GPU_ALL_TYPES(REGISTER);
+TF_CALL_ALL_TYPES(REGISTER);
+TF_CALL_qint8(REGISTER);
+TF_CALL_quint8(REGISTER);
+TF_CALL_qint16(REGISTER);
+TF_CALL_quint16(REGISTER);
+TF_CALL_qint32(REGISTER);
+
 #undef REGISTER
 #endif  // GOOGLE_CUDA || TENSORFLOW_USE_ROCM
 

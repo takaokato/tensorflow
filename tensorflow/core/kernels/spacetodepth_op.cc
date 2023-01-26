@@ -162,6 +162,12 @@ class SpaceToDepthOp : public OpKernel {
 
 // Partial specialization of SpaceToDepthOpFunctor for a CPUDevice.
 namespace functor {
+template <typename Device, typename T, TensorFormat data_format>
+void SpaceToDepthOpFunctor<Device, T, data_format>::operator()(const Device& d, typename TTypes<T, 4>::ConstTensor input,
+                                       int block_size, typename TTypes<T, 4>::Tensor output)
+{
+    assert(false);
+}
 template <typename T>
 struct SpaceToDepthOpFunctor<CPUDevice, T, FORMAT_NHWC> {
   void operator()(const CPUDevice& d, typename TTypes<T, 4>::ConstTensor input,

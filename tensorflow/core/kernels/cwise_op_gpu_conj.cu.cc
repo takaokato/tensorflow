@@ -23,6 +23,8 @@ namespace functor {
 #if !defined(MLIR_GENERATED_GPU_KERNELS_ENABLED) | 1
 DEFINE_UNARY1(conj, complex64);
 DEFINE_UNARY1(conj, complex128);
+DEFINE_UNARY1(conj, float);
+DEFINE_UNARY1(conj, double);
 #endif
 }  // namespace functor
 }  // namespace tensorflow

@@ -66,9 +66,15 @@ void ConcatGPUImpl(const Eigen::GpuDevice& d,
       const GpuDeviceArrayStruct<int64_t>& ptr_offsets, bool fixed_size,      \
       int split_size, typename TTypes<T, 2>::Matrix* output);
 
-TF_CALL_INTEGRAL_TYPES(REGISTER);  // int32 Needed for TensorLists.
-TF_CALL_bfloat16(REGISTER);
-TF_CALL_GPU_ALL_TYPES(REGISTER);
+//TF_CALL_INTEGRAL_TYPES(REGISTER);  // int32 Needed for TensorLists.
+//TF_CALL_bfloat16(REGISTER);
+//TF_CALL_GPU_ALL_TYPES(REGISTER);
+TF_CALL_ALL_TYPES(REGISTER);
+TF_CALL_qint8(REGISTER);
+TF_CALL_quint8(REGISTER);
+TF_CALL_qint16(REGISTER);
+TF_CALL_quint16(REGISTER);
+TF_CALL_qint32(REGISTER);
 #undef REGISTER
 
 }  // namespace tensorflow

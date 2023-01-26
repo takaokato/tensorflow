@@ -171,7 +171,10 @@ void Cast(const Device& d, typename TTypes<Tout>::Flat o,
 template <typename Device, typename Tout, typename Tin>
 struct CastFunctor {
   void operator()(const Device& d, typename TTypes<Tout>::Flat o,
-                  typename TTypes<Tin>::ConstFlat i, bool truncate = false);
+                  typename TTypes<Tin>::ConstFlat i, bool truncate = false)
+  {
+      assert(false);
+  }
 };
 
 // Only enable LSBZeroSetterHelper for 64 and 32 bit input data types.
